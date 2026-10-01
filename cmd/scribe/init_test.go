@@ -310,7 +310,7 @@ func TestAgentHandshakeTemplates_QMDTransportContract(t *testing.T) {
 			mcpAt := strings.Index(out, "qmd MCP `query` tool")
 			exactAt := strings.Index(out, "exact-term, no-model retrieval")
 			fallbackAt := strings.Index(out, "`qmd query \"<natural language question>\"`")
-			if mcpAt < 0 || exactAt < 0 || fallbackAt < 0 || !(mcpAt < exactAt && exactAt < fallbackAt) {
+			if mcpAt < 0 || exactAt < 0 || fallbackAt < 0 || mcpAt >= exactAt || exactAt >= fallbackAt {
 				t.Errorf("%s handshake retrieval order is not MCP query -> exact shell search -> semantic shell fallback", tc.name)
 			}
 			if strings.Contains(out, "always available, and the reliable default") || strings.Contains(out, "shell command is always available and is the reliable default") {
